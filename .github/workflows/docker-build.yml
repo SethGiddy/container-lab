@@ -1,26 +1,20 @@
-name: Docker CI
+name: Docker Build
 
 on:
- push:
+  push:
     branches:
       - main
-
-pull_request:
+  pull_request:
     branches:
       - main
 
 jobs:
-
-  docker:
-
+  docker-build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/checkout@v4
-
-      - name: Build Docker Image
+      - name: Build Docker image
         run: docker build -t currency-converter .
-
-      - name: List Docker Images
-        run: docker images
